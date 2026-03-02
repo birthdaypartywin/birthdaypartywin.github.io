@@ -1,41 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Birthday Giveaway</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Giveaway</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff4e50, #fc913a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.dob-group {
+    display: flex;
+    gap: 10px;
+}
+
+.dob-group input {
+    flex: 1;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background: #ff4e50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e63e40;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Birthday Giveaway</h1>
-    <p>Enter your details for a chance to win!</p>
-    <form id="giveaway-form" action="https://formspree.io/f/xpqjgdvw" method="POST">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+<div class="container">
+    <h1>Win Daily Birthday Prizes 🎉</h1>
+    <p>Enter your details for a chance to win prizes on your birthday!</p>
 
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" required>
+    <form id="birthdayForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
 
-      <label for="dob">Date of Birth</label>
-      <div class="dob-group">
-        <input type="text" id="dob_d1" maxlength="1" required>
-        <input type="text" id="dob_d2" maxlength="1" required>
-        <span>/</span>
-        <input type="text" id="dob_m1" maxlength="1" required>
-        <input type="text" id="dob_m2" maxlength="1" required>
-        <span>/</span>
-        <input type="text" id="dob_y1" maxlength="1" required>
-        <input type="text" id="dob_y2" maxlength="1" required>
-      </div>
-      <input type="hidden" id="dob" name="dob">
+        <div class="dob-group">
+            <input type="text" id="dd" placeholder="DD" maxlength="2" required>
+            <input type="text" id="mm" placeholder="MM" maxlength="2" required>
+            <input type="text" id="yy" placeholder="YYYY" maxlength="4" required>
+        </div>
 
-      <button type="submit">Enter Giveaway</button>
+        <button type="submit">Enter Giveaway</button>
     </form>
-  </div>
-<script src="script.js"></script>
+</div>
+
+<script>
+document.getElementById("birthdayForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+
+    const dd = document.getElementById("dd").value;
+    const mm = document.getElementById("mm").value;
+    const yy = document.getElementById("yy").value;
+
+    const dob = `${yy}-${mm}-${dd}`;
+
+    const payload = {
+        name: name,
+        email: email,
+        phone: phone,
+        dob: dob
+    };
+
+    try {
+        await fetch("https://hooks.airtable.com/workflows/v1/genericWebhook/appUySacpg59UCT9H/wflCAIFqCNnnrceTd/wtrZLgFEjijKVnGAZ", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        alert("You're officially entered! 🎉");
+        this.reset();
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again.");
+    }
+});
+</script>
+
 </body>
 </html>
