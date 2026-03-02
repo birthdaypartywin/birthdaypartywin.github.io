@@ -10,7 +10,9 @@
 <style>
 body {
     margin: 0;
+    * {
     font-family: 'Poppins', sans-serif;
+}
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
 }
@@ -106,13 +108,18 @@ button:hover {
 }
 
 .phone-group select {
-    width: 110px;
+    width: 95px;
     padding: 14px 8px;
     border-radius: 10px;
     border: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif;
-    background: white;
+    background-color: white;
+    color: #111;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .phone-group input {
