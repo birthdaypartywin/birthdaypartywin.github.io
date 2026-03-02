@@ -1,161 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Giveaway</title>
+    <div class="badge">Daily $100 Prize</div>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <h1>Your Birthday Could Pay You 🎉</h1>
+    <div class="sub">Enter once. Automatically entered every year.</div>
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-}
+    <form action="https://formspree.io/f/xpqjgdww" method="POST">
 
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
 
-.card {
-    background: white;
-    color: #111;
-    padding: 50px 40px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 520px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-    text-align: center;
-}
-
-.badge {
-    background: linear-gradient(90deg, #ff4e50, #ff9966);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 34px;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-
-.sub {
-    font-size: 16px;
-    margin-bottom: 25px;
-    color: #555;
-}
-
-input, select {
-    width: 100%;
-    padding: 14px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.phone-group {
-    display: flex;
-    gap: 8px;
-}
-
-.phone-group select {
-    width: 95px;
-}
-
-.phone-group input {
-    flex: 1;
-}
-
-.dob-group {
-    display: flex;
-    gap: 10px;
-}
-
-.dob-group input {
-    text-align: center;
-}
-
-button {
-    width: 100%;
-    padding: 16px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(90deg, #ff4e50, #ff9966);
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.25s ease;
-}
-
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 25px rgba(255,78,80,0.4);
-}
-
-.trust {
-    margin-top: 18px;
-    font-size: 13px;
-    color: #777;
-}
-</style>
-</head>
-
-<body>
-
-<div class="wrapper">
-    <div class="card">
-
-        <div class="badge">Daily Prizes!!</div>
-
-        <h1>Win On Your Birthday 🎉</h1>
-        <div class="sub">Enter once. Automatically entered every year.</div>
-
-        <form action="https://formspree.io/f/YOUR_REAL_ID" method="POST">
-
-            <input type="text" name="name" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-
-            <div class="phone-group">
-                <select name="country_code" required>
-                    <option value="+61">+61</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
-                    <option value="+64">+64</option>
-                </select>
-                <input type="tel" name="phone" placeholder="Phone Number" required>
-            </div>
-
-            <div class="dob-group">
-                <input type="text" name="dob_day" placeholder="DD" maxlength="2" required>
-                <input type="text" name="dob_month" placeholder="MM" maxlength="2" required>
-                <input type="text" name="dob_year" placeholder="YYYY" maxlength="4" required>
-            </div>
-
-            <button type="submit">Enter The Giveaway</button>
-
-        </form>
-
-        <div class="trust">
-            Secure entry. No spam. Takes 30 seconds.
+        <div class="phone-group">
+            <select name="country_code" required>
+                <option value="+61">+61</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+                <option value="+64">+64</option>
+            </select>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
         </div>
 
-    </div>
-</div>
+        <div class="dob-group">
+            <input type="text" name="dob_day" placeholder="DD" maxlength="2" required>
+            <input type="text" name="dob_month" placeholder="MM" maxlength="2" required>
+            <input type="text" name="dob_year" placeholder="YYYY" maxlength="4" required>
+        </div>
 
-</body>
-</html>
+        <button type="submit">Enter Free Now</button>
+
+    </form>
+
+    <div class="trust">
+        Secure entry. No spam. Takes 30 seconds.
+    </div>
+
+</div>
