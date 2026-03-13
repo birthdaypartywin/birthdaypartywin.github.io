@@ -11,12 +11,15 @@
 
 <style>
 
-*{box-sizing:border-box;}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:radial-gradient(circle at 20% 30%,#ff00cc,transparent 40%),
+background:
+radial-gradient(circle at 20% 30%,#ff00cc,transparent 40%),
 radial-gradient(circle at 80% 70%,#00f5ff,transparent 40%),
 linear-gradient(-45deg,#ff0080,#ff8c00,#00f5ff,#ff0000);
 background-size:400% 400%;
@@ -24,28 +27,36 @@ animation:bgMove 10s ease infinite;
 overflow-x:hidden;
 color:white;
 }
+
 @keyframes bgMove{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
 
-/* glow */
 body::after{
 content:"";
 position:fixed;
 inset:0;
-background:radial-gradient(circle,rgba(255,255,255,0.2),transparent 60%);
+background:radial-gradient(circle,rgba(255,255,255,0.18),transparent 60%);
 animation:pulse 4s infinite;
 pointer-events:none;
 }
+
 @keyframes pulse{
 0%{opacity:0.4}
 50%{opacity:0.8}
 100%{opacity:0.4}
 }
 
-/* confetti */
+/* Prevent ANY text overflow */
+h1,h2,h3,div,p{
+max-width:100%;
+word-break:break-word;
+overflow-wrap:break-word;
+}
+
+/* Confetti */
 .confetti{
 position:fixed;
 top:-20px;
@@ -53,11 +64,12 @@ border-radius:3px;
 animation:fall linear infinite;
 z-index:1;
 }
+
 @keyframes fall{
 100%{transform:translateY(110vh) rotate(1080deg);}
 }
 
-/* banner */
+/* Banner */
 .launch-banner{
 text-align:center;
 padding:14px;
@@ -66,7 +78,7 @@ background:rgba(0,0,0,0.6);
 letter-spacing:2px;
 }
 
-/* layout */
+/* Layout */
 .wrapper{
 display:flex;
 justify-content:center;
@@ -85,21 +97,24 @@ padding:50px 40px;
 max-width:600px;
 width:100%;
 text-align:center;
-box-shadow:0 0 120px rgba(255,0,128,0.6),
+box-shadow:
+0 0 120px rgba(255,0,128,0.6),
 0 0 200px rgba(0,255,255,0.5);
 outline:4px solid transparent;
 animation:borderGlow 4s linear infinite;
 }
 
-/* animated border WITHOUT shrinking layout */
+/* Animated border */
 @keyframes borderGlow{
 0%{outline-color:#ff00cc;}
 50%{outline-color:#00f5ff;}
 100%{outline-color:#ff00cc;}
 }
 
-/* headline */
-.headline-wrap{margin-bottom:30px;}
+/* Headline */
+.headline-wrap{
+margin-bottom:30px;
+}
 
 .nuclear-headline{
 font-size:34px;
@@ -111,7 +126,9 @@ background-size:200% auto;
 -webkit-text-fill-color:transparent;
 animation:shineText 3s linear infinite;
 text-shadow:0 0 30px rgba(255,255,255,0.9);
+line-height:1.2;
 }
+
 @keyframes shineText{
 0%{background-position:200% center;}
 100%{background-position:-200% center;}
@@ -125,15 +142,22 @@ color:#ffd700;
 text-shadow:0 0 20px #ff8c00,0 0 40px #ff0000;
 }
 
-/* form */
+/* Form */
 form{
 display:flex;
 flex-direction:column;
 gap:16px;
 }
 
-.row{display:flex;gap:16px;}
-.phone-group{display:flex;gap:16px;}
+.row{
+display:flex;
+gap:16px;
+}
+
+.phone-group{
+display:flex;
+gap:16px;
+}
 
 input,select{
 flex:1;
@@ -146,11 +170,12 @@ background:rgba(255,255,255,0.95);
 width:100%;
 }
 
-/* floating DOB label */
+/* DOB floating label */
 .dob-wrapper{
 position:relative;
 text-align:left;
 }
+
 .dob-label{
 position:absolute;
 top:-10px;
@@ -163,7 +188,7 @@ font-weight:600;
 color:#444;
 }
 
-/* button */
+/* Button */
 button{
 padding:18px;
 border:none;
@@ -175,11 +200,12 @@ font-weight:800;
 cursor:pointer;
 transition:0.3s;
 }
+
 button:hover{
 transform:scale(1.03);
 }
 
-/* how box */
+/* How box */
 .how-box{
 margin-top:8px;
 padding:18px;
@@ -193,6 +219,7 @@ cursor:pointer;
 font-size:20px;
 font-weight:800;
 }
+
 .how-icon{
 width:34px;
 height:34px;
@@ -206,7 +233,7 @@ font-size:18px;
 font-weight:800;
 }
 
-/* modal */
+/* Modal */
 .modal-overlay{
 position:fixed;
 inset:0;
@@ -216,6 +243,7 @@ justify-content:center;
 align-items:center;
 z-index:100;
 }
+
 .modal{
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(25px);
@@ -226,19 +254,36 @@ width:90%;
 text-align:center;
 box-shadow:0 0 60px #00f5ff;
 }
+
 .close{
 margin-top:15px;
 font-weight:800;
 cursor:pointer;
 }
 
-/* mobile */
+/* Mobile */
 @media(max-width:768px){
-.card{padding:30px 20px;}
-.row,.phone-group{flex-direction:column;}
-.nuclear-headline{font-size:24px;}
-.prize-line{font-size:18px;}
-.how-box{font-size:18px;}
+
+.card{
+padding:30px 20px;
+}
+
+.row,.phone-group{
+flex-direction:column;
+}
+
+.nuclear-headline{
+font-size:22px;
+}
+
+.prize-line{
+font-size:18px;
+}
+
+.how-box{
+font-size:18px;
+}
+
 }
 
 </style>
@@ -335,8 +380,13 @@ How It Works
 <script>
 flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
 
-function openModal(){document.getElementById("modal").style.display="flex";}
-function closeModal(){document.getElementById("modal").style.display="none";}
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
 document.getElementById("modal").addEventListener("click",function(e){
 if(e.target.id==="modal"){closeModal();}
 });
