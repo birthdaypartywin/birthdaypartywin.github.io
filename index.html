@@ -32,35 +32,6 @@ color:white;
 100%{background-position:0% 50%}
 }
 
-body::after{
-content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 60%);
-animation:pulse 4s infinite;
-pointer-events:none;
-}
-
-@keyframes pulse{
-0%{opacity:0.4}
-50%{opacity:0.7}
-100%{opacity:0.4}
-}
-
-/* Confetti */
-.confetti{
-position:fixed;
-top:-20px;
-border-radius:3px;
-animation:fall linear infinite;
-z-index:1;
-}
-
-@keyframes fall{
-100%{transform:translateY(110vh) rotate(1080deg);}
-}
-
-/* Banner */
 .launch-banner{
 text-align:center;
 padding:14px;
@@ -69,76 +40,48 @@ background:rgba(0,0,0,0.6);
 letter-spacing:2px;
 }
 
-/* Layout */
 .wrapper{
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:calc(100vh - 60px);
 padding:30px 20px;
-position:relative;
-z-index:5;
 }
 
 .card{
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(25px);
+backdrop-filter:blur(20px);
 border-radius:30px;
-padding:50px 40px;
+padding:40px 30px;
 max-width:600px;
 width:100%;
 text-align:center;
-box-shadow:
-0 0 100px rgba(255,0,128,0.5),
-0 0 160px rgba(0,255,255,0.4);
-outline:3px solid #ff00cc;
-
-/* CRITICAL FIX */
+box-shadow:0 0 100px rgba(255,0,128,0.5),
+0 0 150px rgba(0,255,255,0.4);
 overflow:hidden;
 }
 
-/* Headline */
-.headline-wrap{
-margin-bottom:30px;
-}
-
-.nuclear-headline{
-font-size:34px;
+/* Header */
+.icon-headline{
+font-size:28px;
 font-weight:800;
-text-transform:uppercase;
-background:linear-gradient(90deg,#ffffff,#ffff00,#ffffff);
-background-size:200% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shineText 3s linear infinite;
-line-height:1.2;
+margin-bottom:10px;
 }
 
-@keyframes shineText{
-0%{background-position:200% center;}
-100%{background-position:-200% center;}
-}
-
-.prize-line{
-margin-top:12px;
-font-size:22px;
-font-weight:800;
+.icon-sub{
+font-size:20px;
+font-weight:700;
 color:#ffd700;
+margin-bottom:25px;
 }
 
-/* Form */
 form{
 display:flex;
 flex-direction:column;
 gap:16px;
 }
 
-.row{
-display:flex;
-gap:16px;
-}
-
-.phone-group{
+.row,.phone-group{
 display:flex;
 gap:16px;
 }
@@ -154,7 +97,7 @@ background:rgba(255,255,255,0.95);
 width:100%;
 }
 
-/* DOB label */
+/* FIXED DOB LABEL */
 .dob-wrapper{
 position:relative;
 text-align:left;
@@ -162,17 +105,16 @@ text-align:left;
 
 .dob-label{
 position:absolute;
-top:-10px;
-left:14px;
-background:white;
-padding:2px 8px;
-border-radius:6px;
-font-size:12px;
+top:6px;              /* moved inside box */
+left:16px;
+background:transparent;
+padding:0;
+font-size:14px;
 font-weight:600;
-color:#444;
+color:#777;
+pointer-events:none;
 }
 
-/* Button */
 button{
 padding:18px;
 border:none;
@@ -182,17 +124,11 @@ color:white;
 font-size:20px;
 font-weight:800;
 cursor:pointer;
-transition:0.3s;
 }
 
-button:hover{
-transform:scale(1.03);
-}
-
-/* How box */
 .how-box{
 margin-top:8px;
-padding:18px;
+padding:16px;
 border-radius:12px;
 background:linear-gradient(135deg,#00f5ff,#0099ff);
 display:flex;
@@ -200,24 +136,23 @@ align-items:center;
 justify-content:center;
 gap:10px;
 cursor:pointer;
-font-size:20px;
+font-size:18px;
 font-weight:800;
 }
 
 .how-icon{
-width:34px;
-height:34px;
+width:30px;
+height:30px;
 border-radius:50%;
 background:white;
 color:#0099ff;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:18px;
+font-size:16px;
 font-weight:800;
 }
 
-/* Modal */
 .modal-overlay{
 position:fixed;
 inset:0;
@@ -230,13 +165,12 @@ z-index:100;
 
 .modal{
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(25px);
+backdrop-filter:blur(20px);
 border-radius:20px;
-padding:35px;
+padding:30px;
 max-width:500px;
 width:90%;
 text-align:center;
-box-shadow:0 0 60px #00f5ff;
 }
 
 .close{
@@ -245,51 +179,22 @@ font-weight:800;
 cursor:pointer;
 }
 
-/* Mobile */
 @media(max-width:768px){
-
-.card{
-padding:30px 20px;
-}
-
 .row,.phone-group{
 flex-direction:column;
 }
-
-.nuclear-headline{
+.icon-headline{
 font-size:22px;
 }
-
-.prize-line{
+.icon-sub{
 font-size:18px;
 }
-
-.how-box{
-font-size:18px;
-}
-
 }
 
 </style>
 </head>
 
 <body>
-
-<script>
-setInterval(()=>{
-for(let i=0;i<12;i++){
-let c=document.createElement("div");
-c.classList.add("confetti");
-c.style.left=Math.random()*100+"vw";
-c.style.width=(Math.random()*8+6)+"px";
-c.style.height=(Math.random()*6+4)+"px";
-c.style.background=["#ff00cc","#ff8c00","#00f5ff","#ffffff","#ffff00"][Math.floor(Math.random()*5)];
-c.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),6000);
-}
-},400);
-</script>
 
 <div class="launch-banner">
 🚀 Launching 1st June 2026 🚀
@@ -298,9 +203,12 @@ setTimeout(()=>c.remove(),6000);
 <div class="wrapper">
 <div class="card">
 
-<div class="headline-wrap">
-<div class="nuclear-headline">HURRY REGISTER NOW!!</div>
-<div class="prize-line">UP TO $500 IN PRIZES!!</div>
+<div class="icon-headline">
+🎉 BIG BIRTHDAY GIVEAWAY 🎉
+</div>
+
+<div class="icon-sub">
+💰 Win Up To $500
 </div>
 
 <form id="entryForm">
@@ -364,11 +272,12 @@ How It Works
 <script>
 flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
 
-function openModal(){document.getElementById("modal").style.display="flex";}
-function closeModal(){document.getElementById("modal").style.display="none";}
-document.getElementById("modal").addEventListener("click",function(e){
-if(e.target.id==="modal"){closeModal();}
-});
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
 
 document.getElementById("entryForm").addEventListener("submit",async function(e){
 e.preventDefault();
