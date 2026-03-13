@@ -126,14 +126,21 @@ background:rgba(255,255,255,0.95);
 width:100%;
 }
 
-/* 🔥 FIXED BIRTHDAY LABEL (ONLY CHANGE) */
+/* Date fix */
 .dob-wrapper{
 position:relative;
 text-align:left;
+width:100%;
 }
+
+.dob-wrapper input{
+width:100%;
+display:block;
+}
+
 .dob-label{
 position:absolute;
-top:8px;       /* was negative before */
+top:8px;
 left:18px;
 background:transparent;
 font-size:14px;
@@ -181,6 +188,39 @@ font-size:22px;
 font-weight:800;
 }
 
+/* Modal */
+.modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-content{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(25px);
+padding:40px;
+border-radius:25px;
+max-width:500px;
+width:90%;
+text-align:center;
+box-shadow:0 0 60px #00f5ff;
+}
+
+.close-btn{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#ff00cc,#ff8c00);
+color:white;
+font-weight:800;
+cursor:pointer;
+}
+
 /* Mobile */
 @media(max-width:768px){
 .card{padding:35px 25px;}
@@ -196,6 +236,7 @@ font-weight:800;
 <body>
 
 <script>
+/* Confetti */
 setInterval(()=>{
 for(let i=0;i<12;i++){
 let c=document.createElement("div");
@@ -257,7 +298,7 @@ setTimeout(()=>c.remove(),6000);
 
 <button type="submit">ENTER NOW 🚀</button>
 
-<div class="how-box">
+<div class="how-box" onclick="openModal()">
 <div class="how-icon">?</div>
 How It Works
 </div>
@@ -267,8 +308,39 @@ How It Works
 </div>
 </div>
 
+<!-- Modal -->
+<div class="modal-overlay" id="howModal">
+  <div class="modal-content">
+    <h2>🎉 How It Works</h2>
+    <p>
+      1. Enter your details once.<br><br>
+      2. On your birthday, you are automatically entered into our daily prize draw.<br><br>
+      3. Winners are contacted directly.<br><br>
+      4. The more people join, the bigger the prizes grow!<br><br>
+      5. It’s absolutely free!
+    </p>
+    <button class="close-btn" onclick="closeModal()">CLOSE</button>
+  </div>
+</div>
+
 <script>
 flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
+
+function openModal(){
+document.getElementById("howModal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("howModal").style.display="none";
+}
+
+document.getElementById("howModal").addEventListener("click",function(e){
+if(e.target.id==="howModal"){closeModal();}
+});
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape"){closeModal();}
+});
 </script>
 
 </body>
