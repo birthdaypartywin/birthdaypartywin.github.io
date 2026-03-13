@@ -32,6 +32,21 @@ color:white;
 100%{background-position:0% 50%}
 }
 
+/* Confetti */
+.confetti{
+position:fixed;
+top:-20px;
+border-radius:3px;
+opacity:0.9;
+animation:fall linear infinite;
+z-index:1;
+}
+
+@keyframes fall{
+100%{transform:translateY(110vh) rotate(720deg);}
+}
+
+/* Banner */
 .launch-banner{
 text-align:center;
 padding:14px;
@@ -40,12 +55,15 @@ background:rgba(0,0,0,0.6);
 letter-spacing:2px;
 }
 
+/* Layout */
 .wrapper{
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:calc(100vh - 60px);
 padding:30px 20px;
+position:relative;
+z-index:5;
 }
 
 .card{
@@ -58,20 +76,34 @@ width:100%;
 text-align:center;
 box-shadow:0 0 80px rgba(255,0,128,0.6),
 0 0 150px rgba(0,255,255,0.5);
+overflow:hidden;
 }
+
+/* Headline */
+.headline-wrap{margin-bottom:30px;}
 
 .nuclear-headline{
 font-size:34px;
 font-weight:800;
 text-transform:uppercase;
-margin-bottom:10px;
+background:linear-gradient(90deg,#ffffff,#ffff00,#ffffff);
+background-size:200% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shineText 3s linear infinite;
+}
+
+@keyframes shineText{
+0%{background-position:200% center;}
+100%{background-position:-200% center;}
 }
 
 .prize-line{
+margin-top:15px;
 font-size:22px;
 font-weight:800;
 color:#ffff00;
-margin-bottom:25px;
+text-shadow:0 0 20px #ff8c00,0 0 40px #ff0000;
 }
 
 form{
@@ -92,7 +124,7 @@ border-radius:14px;
 border:none;
 font-size:15px;
 font-weight:600;
-background:white;
+background:rgba(255,255,255,0.95);
 width:100%;
 }
 
@@ -107,10 +139,91 @@ font-weight:800;
 cursor:pointer;
 }
 
+.how-box{
+margin-top:10px;
+padding:22px;
+border-radius:15px;
+background:linear-gradient(135deg,#00f5ff,#0099ff);
+display:flex;
+align-items:center;
+justify-content:center;
+gap:14px;
+cursor:pointer;
+box-shadow:0 0 35px rgba(0,255,255,0.9);
+font-size:22px;
+font-weight:800;
+}
+
+.how-icon{
+width:40px;
+height:40px;
+border-radius:50%;
+background:white;
+color:#0099ff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:800;
+}
+
+/* Modal */
+.modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-content{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(25px);
+padding:40px;
+border-radius:25px;
+max-width:500px;
+width:90%;
+text-align:center;
+box-shadow:0 0 60px #00f5ff;
+}
+
+.close-btn{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#ff00cc,#ff8c00);
+color:white;
+font-weight:800;
+cursor:pointer;
+}
+
 </style>
 </head>
 
 <body>
+
+<script>
+
+/* Confetti */
+
+setInterval(()=>{
+for(let i=0;i<12;i++){
+let c=document.createElement("div");
+c.classList.add("confetti");
+c.style.left=Math.random()*100+"vw";
+c.style.width=(Math.random()*8+6)+"px";
+c.style.height=(Math.random()*6+4)+"px";
+c.style.background=["#ff00cc","#ff8c00","#00f5ff","#ffffff","#ffff00"][Math.floor(Math.random()*5)];
+c.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),6000);
+}
+},400);
+
+</script>
 
 <div class="launch-banner">
 🚀 Launching 1st June 2026 🚀
@@ -119,8 +232,10 @@ cursor:pointer;
 <div class="wrapper">
 <div class="card">
 
-<div class="nuclear-headline">HURRY REGISTER NOW</div>
-<div class="prize-line">UP TO $500 IN PRIZES</div>
+<div class="headline-wrap">
+<div class="nuclear-headline">HURRY REGISTER NOW!!</div>
+<div class="prize-line">UP TO $500 IN PRIZES!!</div>
+</div>
 
 <form id="entryForm">
 
@@ -140,7 +255,7 @@ cursor:pointer;
 <input type="email" name="email" placeholder="Email Address" required>
 
 <div class="phone-group">
-<select name="country_code">
+<select name="country_code" required>
 <option value="+61">+61</option>
 <option value="+1">+1</option>
 <option value="+44">+44</option>
@@ -154,17 +269,51 @@ cursor:pointer;
 
 <button type="submit">ENTER NOW 🚀</button>
 
+<div class="how-box" onclick="openModal()">
+<div class="how-icon">?</div>
+How It Works
+</div>
+
 </form>
 
 </div>
 </div>
 
+<div class="modal-overlay" id="howModal">
+<div class="modal-content">
+<h2>🎉 How It Works</h2>
+<p>
+1. Enter your details once.<br><br>
+2. On your birthday you enter the daily prize draw.<br><br>
+3. Winners are contacted directly.<br><br>
+4. The more people join the bigger the prizes.<br><br>
+5. Entry costs nothing.
+</p>
+<button class="close-btn" onclick="closeModal()">CLOSE</button>
+</div>
+</div>
+
 <script>
 
-flatpickr("#dob",{
-dateFormat:"Y-m-d",
-maxDate:"today"
+flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today"});
+
+function openModal(){
+document.getElementById("howModal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("howModal").style.display="none";
+}
+
+document.getElementById("howModal").addEventListener("click",function(e){
+if(e.target.id==="howModal"){closeModal();}
 });
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape"){closeModal();}
+});
+
+/* FORM LOGIC */
 
 document.getElementById("entryForm").addEventListener("submit",function(e){
 
