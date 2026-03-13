@@ -11,9 +11,7 @@
 
 <style>
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
 margin:0;
@@ -38,22 +36,15 @@ body::after{
 content:"";
 position:fixed;
 inset:0;
-background:radial-gradient(circle,rgba(255,255,255,0.18),transparent 60%);
+background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 60%);
 animation:pulse 4s infinite;
 pointer-events:none;
 }
 
 @keyframes pulse{
 0%{opacity:0.4}
-50%{opacity:0.8}
+50%{opacity:0.7}
 100%{opacity:0.4}
-}
-
-/* Prevent ANY text overflow */
-h1,h2,h3,div,p{
-max-width:100%;
-word-break:break-word;
-overflow-wrap:break-word;
 }
 
 /* Confetti */
@@ -98,17 +89,12 @@ max-width:600px;
 width:100%;
 text-align:center;
 box-shadow:
-0 0 120px rgba(255,0,128,0.6),
-0 0 200px rgba(0,255,255,0.5);
-outline:4px solid transparent;
-animation:borderGlow 4s linear infinite;
-}
+0 0 100px rgba(255,0,128,0.5),
+0 0 160px rgba(0,255,255,0.4);
+outline:3px solid #ff00cc;
 
-/* Animated border */
-@keyframes borderGlow{
-0%{outline-color:#ff00cc;}
-50%{outline-color:#00f5ff;}
-100%{outline-color:#ff00cc;}
+/* CRITICAL FIX */
+overflow:hidden;
 }
 
 /* Headline */
@@ -125,7 +111,6 @@ background-size:200% auto;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 animation:shineText 3s linear infinite;
-text-shadow:0 0 30px rgba(255,255,255,0.9);
 line-height:1.2;
 }
 
@@ -139,7 +124,6 @@ margin-top:12px;
 font-size:22px;
 font-weight:800;
 color:#ffd700;
-text-shadow:0 0 20px #ff8c00,0 0 40px #ff0000;
 }
 
 /* Form */
@@ -170,7 +154,7 @@ background:rgba(255,255,255,0.95);
 width:100%;
 }
 
-/* DOB floating label */
+/* DOB label */
 .dob-wrapper{
 position:relative;
 text-align:left;
@@ -293,7 +277,7 @@ font-size:18px;
 
 <script>
 setInterval(()=>{
-for(let i=0;i<14;i++){
+for(let i=0;i<12;i++){
 let c=document.createElement("div");
 c.classList.add("confetti");
 c.style.left=Math.random()*100+"vw";
@@ -380,13 +364,8 @@ How It Works
 <script>
 flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
 
-function openModal(){
-document.getElementById("modal").style.display="flex";
-}
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
+function openModal(){document.getElementById("modal").style.display="flex";}
+function closeModal(){document.getElementById("modal").style.display="none";}
 document.getElementById("modal").addEventListener("click",function(e){
 if(e.target.id==="modal"){closeModal();}
 });
