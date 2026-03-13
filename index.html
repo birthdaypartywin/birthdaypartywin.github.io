@@ -21,7 +21,7 @@ radial-gradient(circle at 20% 30%,#ff00cc,transparent 40%),
 radial-gradient(circle at 80% 70%,#00f5ff,transparent 40%),
 linear-gradient(-45deg,#ff0080,#ff8c00,#00f5ff,#ff0000);
 background-size:400% 400%;
-animation:bgMove 10s ease infinite;
+animation:bgMove 8s ease infinite;
 overflow-x:hidden;
 color:white;
 }
@@ -32,6 +32,20 @@ color:white;
 100%{background-position:0% 50%}
 }
 
+/* Confetti */
+.confetti{
+position:fixed;
+top:-20px;
+border-radius:3px;
+opacity:0.9;
+animation:fall linear infinite;
+z-index:1;
+}
+@keyframes fall{
+100%{transform:translateY(110vh) rotate(720deg);}
+}
+
+/* Banner */
 .launch-banner{
 text-align:center;
 padding:14px;
@@ -40,56 +54,71 @@ background:rgba(0,0,0,0.6);
 letter-spacing:2px;
 }
 
+/* Layout */
 .wrapper{
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:calc(100vh - 60px);
 padding:30px 20px;
+position:relative;
+z-index:5;
 }
 
 .card{
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(20px);
+backdrop-filter:blur(25px);
 border-radius:30px;
-padding:40px 30px;
+padding:60px 50px;
 max-width:600px;
 width:100%;
 text-align:center;
-box-shadow:0 0 100px rgba(255,0,128,0.5),
-0 0 150px rgba(0,255,255,0.4);
+box-shadow:0 0 80px rgba(255,0,128,0.6),
+0 0 150px rgba(0,255,255,0.5);
 overflow:hidden;
 }
 
-/* Header */
-.icon-headline{
-font-size:28px;
+/* Headline */
+.headline-wrap{margin-bottom:30px;}
+
+.nuclear-headline{
+font-size:34px;
 font-weight:800;
-margin-bottom:10px;
+text-transform:uppercase;
+background:linear-gradient(90deg,#ffffff,#ffff00,#ffffff);
+background-size:200% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shineText 3s linear infinite;
+}
+@keyframes shineText{
+0%{background-position:200% center;}
+100%{background-position:-200% center;}
 }
 
-.icon-sub{
-font-size:20px;
-font-weight:700;
-color:#ffd700;
-margin-bottom:25px;
+.prize-line{
+margin-top:15px;
+font-size:22px;
+font-weight:800;
+color:#ffff00;
+text-shadow:0 0 20px #ff8c00, 0 0 40px #ff0000;
 }
 
 form{
 display:flex;
 flex-direction:column;
-gap:16px;
+gap:18px;
 }
 
 .row,.phone-group{
 display:flex;
-gap:16px;
+gap:18px;
 }
 
 input,select{
 flex:1;
-padding:16px;
-border-radius:12px;
+padding:18px;
+border-radius:14px;
 border:none;
 font-size:15px;
 font-weight:600;
@@ -97,104 +126,90 @@ background:rgba(255,255,255,0.95);
 width:100%;
 }
 
-/* FIXED DOB LABEL */
+/* 🔥 FIXED BIRTHDAY LABEL (ONLY CHANGE) */
 .dob-wrapper{
 position:relative;
 text-align:left;
 }
-
 .dob-label{
 position:absolute;
-top:6px;              /* moved inside box */
-left:16px;
+top:8px;       /* was negative before */
+left:18px;
 background:transparent;
-padding:0;
 font-size:14px;
 font-weight:600;
-color:#777;
+color:#666;
 pointer-events:none;
 }
 
 button{
-padding:18px;
+padding:22px;
 border:none;
-border-radius:12px;
+border-radius:15px;
 background:linear-gradient(90deg,#ff00cc,#ff8c00);
 color:white;
-font-size:20px;
+font-size:22px;
 font-weight:800;
 cursor:pointer;
 }
 
 .how-box{
-margin-top:8px;
-padding:16px;
-border-radius:12px;
+margin-top:10px;
+padding:22px;
+border-radius:15px;
 background:linear-gradient(135deg,#00f5ff,#0099ff);
 display:flex;
 align-items:center;
 justify-content:center;
-gap:10px;
+gap:14px;
 cursor:pointer;
-font-size:18px;
+box-shadow:0 0 35px rgba(0,255,255,0.9);
+font-size:22px;
 font-weight:800;
 }
 
 .how-icon{
-width:30px;
-height:30px;
+width:40px;
+height:40px;
 border-radius:50%;
 background:white;
 color:#0099ff;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:16px;
-font-weight:800;
-}
-
-.modal-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:100;
-}
-
-.modal{
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(20px);
-border-radius:20px;
-padding:30px;
-max-width:500px;
-width:90%;
-text-align:center;
-}
-
-.close{
-margin-top:15px;
-font-weight:800;
-cursor:pointer;
-}
-
-@media(max-width:768px){
-.row,.phone-group{
-flex-direction:column;
-}
-.icon-headline{
 font-size:22px;
+font-weight:800;
 }
-.icon-sub{
-font-size:18px;
-}
+
+/* Mobile */
+@media(max-width:768px){
+.card{padding:35px 25px;}
+.row,.phone-group{flex-direction:column;}
+.nuclear-headline{font-size:26px;}
+.prize-line{font-size:18px;}
+.how-box{font-size:18px;padding:18px;}
 }
 
 </style>
 </head>
 
 <body>
+
+<script>
+setInterval(()=>{
+for(let i=0;i<12;i++){
+let c=document.createElement("div");
+c.classList.add("confetti");
+c.style.left=Math.random()*100+"vw";
+c.style.width=(Math.random()*8+6)+"px";
+c.style.height=(Math.random()*6+4)+"px";
+c.style.background=["#ff00cc","#ff8c00","#00f5ff","#ffffff","#ffff00"][Math.floor(Math.random()*5)];
+c.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),6000);
+}
+},400);
+</script>
 
 <div class="launch-banner">
 🚀 Launching 1st June 2026 🚀
@@ -203,12 +218,9 @@ font-size:18px;
 <div class="wrapper">
 <div class="card">
 
-<div class="icon-headline">
-🎉 BIG BIRTHDAY GIVEAWAY 🎉
-</div>
-
-<div class="icon-sub">
-💰 Win Up To $500
+<div class="headline-wrap">
+<div class="nuclear-headline">HURRY REGISTER NOW!!</div>
+<div class="prize-line">UP TO $500 IN PRIZES!!</div>
 </div>
 
 <form id="entryForm">
@@ -245,7 +257,7 @@ font-size:18px;
 
 <button type="submit">ENTER NOW 🚀</button>
 
-<div class="how-box" onclick="openModal()">
+<div class="how-box">
 <div class="how-icon">?</div>
 How It Works
 </div>
@@ -255,40 +267,8 @@ How It Works
 </div>
 </div>
 
-<div class="modal-overlay" id="modal">
-<div class="modal">
-<h2>🎉 How It Works</h2>
-<p>
-1. Enter your details once.<br><br>
-2. On your birthday, you're automatically entered into our daily prize draw.<br><br>
-3. Winners are contacted directly.<br><br>
-4. The more people join, the bigger the prizes grow!<br><br>
-5. It’s absolutely free!
-</p>
-<div class="close" onclick="closeModal()">CLOSE</div>
-</div>
-</div>
-
 <script>
 flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
-
-function openModal(){
-document.getElementById("modal").style.display="flex";
-}
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-document.getElementById("entryForm").addEventListener("submit",async function(e){
-e.preventDefault();
-const formData=new FormData(this);
-await fetch("https://formspree.io/f/xpqjgdww",{
-method:"POST",
-body:formData,
-headers:{'Accept':'application/json'}
-});
-window.location.href="thankyou.html";
-});
 </script>
 
 </body>
