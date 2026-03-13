@@ -15,12 +15,14 @@
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:linear-gradient(-45deg,#ff0080,#ff8c00,#00f5ff,#ff0000);
+background:
+radial-gradient(circle at 20% 30%,#ff00cc,transparent 40%),
+radial-gradient(circle at 80% 70%,#00f5ff,transparent 40%),
+linear-gradient(-45deg,#ff0080,#ff8c00,#00f5ff,#ff0000);
 background-size:400% 400%;
-animation:bgMove 15s ease infinite;
+animation:bgMove 12s ease infinite;
 overflow-x:hidden;
 color:white;
-perspective:1200px;
 }
 
 @keyframes bgMove{
@@ -29,7 +31,21 @@ perspective:1200px;
 100%{background-position:0% 50%}
 }
 
-/* floating particles */
+/* Light sweep beams */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,0.15),transparent 60%);
+animation:beam 8s linear infinite;
+pointer-events:none;
+}
+@keyframes beam{
+0%{transform:translateX(-100%)}
+100%{transform:translateX(100%)}
+}
+
+/* Floating particle dots */
 .particle{
 position:fixed;
 bottom:-20px;
@@ -37,25 +53,25 @@ width:4px;
 height:4px;
 background:white;
 border-radius:50%;
-opacity:0.3;
+opacity:0.4;
 animation:rise linear infinite;
 }
 @keyframes rise{
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* confetti */
+/* Confetti drift */
 .confetti{
 position:fixed;
 top:-20px;
 border-radius:3px;
 animation:fall linear infinite;
+z-index:1;
 }
 @keyframes fall{
-100%{transform:translateY(110vh) translateX(40px) rotate(720deg);}
+100%{transform:translateY(110vh) translateX(60px) rotate(720deg);}
 }
 
-/* banner */
 .launch-banner{
 text-align:center;
 padding:14px;
@@ -64,59 +80,44 @@ background:rgba(0,0,0,0.6);
 letter-spacing:2px;
 }
 
-/* wrapper */
 .wrapper{
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:calc(100vh - 60px);
 padding:30px 20px;
+position:relative;
+z-index:5;
 }
 
-/* card with tilt + glow */
+/* Floating card */
 .card{
-position:relative;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(30px);
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(25px);
 border-radius:30px;
 padding:60px 50px;
 max-width:600px;
 width:100%;
 text-align:center;
-box-shadow:0 0 120px rgba(255,0,128,0.6),
-0 0 200px rgba(0,255,255,0.5);
-transform-style:preserve-3d;
-transition:transform 0.2s ease;
-overflow:hidden;
+box-shadow:0 0 80px rgba(255,0,128,0.6),
+0 0 150px rgba(0,255,255,0.5);
+animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
 }
 
-/* moving reflection */
-.card::after{
-content:"";
-position:absolute;
-top:-100%;
-left:-50%;
-width:200%;
-height:300%;
-background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,0.15),transparent 60%);
-transform:rotate(25deg);
-animation:shine 8s linear infinite;
-}
-@keyframes shine{
-0%{top:-100%}
-100%{top:200%}
-}
-
-/* headline */
+/* Headline */
 .nuclear-headline{
 font-size:34px;
 font-weight:800;
 text-transform:uppercase;
-background:linear-gradient(90deg,#fff,#ffff00,#fff);
+background:linear-gradient(90deg,#ffffff,#ffff00,#ffffff);
 background-size:200% auto;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:shineText 5s linear infinite;
+animation:shineText 4s linear infinite;
 }
 @keyframes shineText{
 0%{background-position:200% center;}
@@ -127,21 +128,15 @@ animation:shineText 5s linear infinite;
 margin-top:15px;
 font-size:22px;
 font-weight:800;
-color:#ffd700;
-animation:flicker 3s infinite alternate;
-}
-@keyframes flicker{
-0%{opacity:1;}
-50%{opacity:0.8;}
-100%{opacity:1;}
+color:#ffff00;
+text-shadow:0 0 20px #ff8c00;
 }
 
-/* form */
 form{
 display:flex;
 flex-direction:column;
 gap:18px;
-margin-top:30px;
+margin-top:25px;
 }
 
 .row,.phone-group{
@@ -162,11 +157,10 @@ transition:all 0.3s ease;
 
 input:focus,select:focus{
 transform:translateY(-3px);
-box-shadow:0 10px 30px rgba(0,255,255,0.6);
+box-shadow:0 10px 25px rgba(0,255,255,0.5);
 outline:none;
 }
 
-/* magnetic button */
 button{
 padding:22px;
 border:none;
@@ -176,11 +170,11 @@ color:white;
 font-size:22px;
 font-weight:800;
 cursor:pointer;
-transition:transform 0.2s ease;
 position:relative;
 overflow:hidden;
 }
 
+/* Button shimmer */
 button::after{
 content:"";
 position:absolute;
@@ -189,7 +183,7 @@ left:-100%;
 width:100%;
 height:100%;
 background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,0.5),transparent 60%);
-animation:shimmer 4s infinite;
+animation:shimmer 5s infinite;
 }
 @keyframes shimmer{
 0%{left:-100%;}
@@ -197,7 +191,6 @@ animation:shimmer 4s infinite;
 100%{left:120%;}
 }
 
-/* dob label */
 .dob-wrapper{
 position:relative;
 text-align:left;
@@ -212,7 +205,6 @@ color:#666;
 pointer-events:none;
 }
 
-/* mobile */
 @media(max-width:768px){
 .row,.phone-group{flex-direction:column;}
 .nuclear-headline{font-size:26px;}
@@ -225,17 +217,9 @@ pointer-events:none;
 <body>
 
 <script>
-// parallax tilt
-document.addEventListener("mousemove",function(e){
-const card=document.querySelector(".card");
-const x=(window.innerWidth/2 - e.pageX)/40;
-const y=(window.innerHeight/2 - e.pageY)/40;
-card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
-});
-
-// confetti
+/* Confetti */
 setInterval(()=>{
-for(let i=0;i<6;i++){
+for(let i=0;i<8;i++){
 let c=document.createElement("div");
 c.classList.add("confetti");
 c.style.left=Math.random()*100+"vw";
@@ -246,9 +230,9 @@ c.style.animationDuration=(Math.random()*3+3)+"s";
 document.body.appendChild(c);
 setTimeout(()=>c.remove(),6000);
 }
-},800);
+},600);
 
-// particles
+/* Floating particles */
 setInterval(()=>{
 let p=document.createElement("div");
 p.classList.add("particle");
@@ -256,7 +240,7 @@ p.style.left=Math.random()*100+"vw";
 p.style.animationDuration=(Math.random()*6+4)+"s";
 document.body.appendChild(p);
 setTimeout(()=>p.remove(),10000);
-},600);
+},800);
 </script>
 
 <div class="launch-banner">
@@ -274,39 +258,39 @@ HURRY REGISTER NOW!!
 UP TO $500 IN PRIZES!!
 </div>
 
-<form>
+<form id="entryForm">
 
 <div class="row">
-<input type="text" placeholder="First Name" required>
-<input type="text" placeholder="Surname" required>
+<input type="text" name="first_name" placeholder="First Name" required>
+<input type="text" name="surname" placeholder="Surname" required>
 </div>
 
-<select required>
-<option disabled selected>Select Sex</option>
+<select name="sex" required>
+<option value="" disabled selected>Select Sex</option>
 <option>Male</option>
 <option>Female</option>
 <option>Other</option>
 <option>Prefer not to say</option>
 </select>
 
-<input type="email" placeholder="Email Address" required>
+<input type="email" name="email" placeholder="Email Address" required>
 
 <div class="phone-group">
-<select>
-<option>+61</option>
-<option>+1</option>
-<option>+44</option>
-<option>+64</option>
+<select name="country_code" required>
+<option value="+61">+61</option>
+<option value="+1">+1</option>
+<option value="+44">+44</option>
+<option value="+64">+64</option>
 </select>
-<input type="tel" placeholder="Phone Number" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
 </div>
 
 <div class="dob-wrapper">
-<label class="dob-label">Select Your Birthday</label>
-<input type="text" id="dob" required>
+<label for="dob" class="dob-label">Select Your Birthday</label>
+<input type="text" id="dob" name="date_of_birth" required>
 </div>
 
-<button>ENTER NOW 🚀</button>
+<button type="submit">ENTER NOW 🚀</button>
 
 </form>
 
@@ -314,7 +298,7 @@ UP TO $500 IN PRIZES!!
 </div>
 
 <script>
-flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today"});
+flatpickr("#dob",{dateFormat:"Y-m-d",maxDate:"today",allowInput:true});
 </script>
 
 </body>
